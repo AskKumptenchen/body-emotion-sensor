@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68,<77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "body-emotion-sensor"
+version = "0.1.0"
+description = "Body emotion mapper: structured emotion analysis (AnalysisInput) JSON to body-axis states and prompt tags"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Ask / 小开发"}]
+license = {text = "MIT"}
+keywords = ["ai", "agent", "emotion", "cli", "tcm", "five-elements"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/AskKumptenchen/body-emotion-sensor"
+Repository = "https://github.com/AskKumptenchen/body-emotion-sensor"
+Issues = "https://github.com/AskKumptenchen/body-emotion-sensor/issues"
+
+[project.scripts]
+bes = "body_emotion.commands:main"
+body-emotion-sensor = "body_emotion.commands:main"
+
+[project.optional-dependencies]
+viz = ["streamlit>=1.28", "plotly>=5"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+license-files = ["LICENSE"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

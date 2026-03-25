@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include pyproject.toml
+recursive-include src *.py
+recursive-include tests *.py
+prune docs
+prune prompts
+prune skill
+prune files
+prune state
+prune .pytest_cache
+global-exclude __pycache__ *.py[cod]
