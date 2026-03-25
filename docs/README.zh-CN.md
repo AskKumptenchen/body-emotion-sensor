@@ -5,6 +5,10 @@
 </p>
 
 <p align="center">
+  <strong>“我们认为通用智能体应拥有情感。我们的愿景是创造出符合真实人体结构的智能体情感系统。”</strong>
+</p>
+
+<p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue" />
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-brightgreen" />
   <img alt="GitHub stars" src="https://img.shields.io/github/stars/AskKumptenchen/body-emotion-sensor?style=flat" />
@@ -12,76 +16,69 @@
 
 <p align="center">
   <a href="#quick-start">快速开始</a> ·
-  <a href="#features">核心功能</a> ·
+  <a href="#what-happens">接入后会发生什么</a> ·
   <a href="#how-it-works">工作原理</a> ·
   <a href="../README.md">English</a>
 </p>
+
+<img src="./cover_web.webp" alt="Body Emotion Sensor 封面" width="100%" />
 
 ## 为什么需要 Body Emotion Sensor？ 💖
 
 你是否觉得，现在的 AI 智能体缺乏真正的“内在自我”？它们或许能在文字中模拟情绪，但并没有一个能在多次对话中延续的内部状态。
 
-**Body Emotion Sensor 旨在改变这一点：**
-
-- **持久化状态：** 赋予 AI 一个长期的身心情志体质（baseline），并让它自然演化。
-- **五脏五行模型：** 基于中医五行（金、木、水、火、土）理论，将复杂的情绪状态映射到五脏系统中。
-- **逐轮状态更新：** 将结构化的情感分析转化为实时的身体状态更新，从而潜移默化地影响智能体的回复风格。
+**Body Emotion Sensor 旨在改变这一点。**
 
 <a id="quick-start"></a>
 
 ## 快速开始 🚀
 
+给你的 AI Agent（例如 OpenClaw）发送：
+
 📥 **安装：**
 
-```bash
-pip install body-emotion-sensor
+```text
+请帮我安装 Body Emotion Sensor：pip install body-emotion-sensor && bes help
 ```
 
-默认安装已包含可视化面板依赖。安装后可直接使用 CLI：
+<a id="what-happens"></a>
 
-```bash
-bes help
-body-emotion-sensor help
-```
+## 当通用智能体接入 Body Emotion Sensor 会发生什么？ 🧩
 
-🔄 **推荐使用流程：**
-
-1. 打印体质初始化提示词：`bes init-prompt`
-2. 初始化状态：`bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --init-json /path/to/init.json`
-3. 检查是否就绪：`bes check-init --workspace /path/to/workspace --agent-id my-agent --name "My Agent"`
-4. 启动新会话：`bes bootstrap --workspace /path/to/workspace --agent-id my-agent --name "My Agent"`
-5. 执行单轮更新：`bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --input /path/to/analysis-input.json`
-
-<a id="features"></a>
-
-## 核心功能 🧩
-
-- **状态持久化：** 按工作区和智能体 ID 存储长期的身心情绪状态。
-- **会话引导（Bootstrap）：** 在新会话开始前，生成 `TURN_CHANGE_TAGS`、`BODY_TAG` 和 `BASELINE_PERSONA`。
-- **精简提示载荷：** 为回复层提供轻量级的提示词注入，不占用过多上下文窗口。
-- **可追溯历史：** 保留完整的 state/history 轨迹数据，便于调试与可视化。
-- **可视化面板：** 运行 `bes panel` 直观查看智能体的情感变化轨迹。
-
-<img src="./panel.png" alt="可视化面板" width="600" />
+1. **自动构建人格底色：** 智能体通过调用 `bes init-state` 命令，自动为自己创建一套符合其性格设定、可持久化的“五脏”身体参数。
+2. **情感上下文感知：** 每次对话时，智能体会结合自身人设，自动识别当前对话对自身情绪产生的影响。
+3. **动态身体状态更新：** 调用 `bes run` 命令，以中医思想动态更新五脏健康度。五脏的变化会映射为具体的情绪标签和身体状态提示词，使智能体的回复充满真实的情感张力。
+4. **情感记忆持久化：** 身体状态会被持久化保存。即使开启新对话，智能体依然保持上次对话结束时的“身体状态”，彻底告别“情感断片”。
 
 <a id="how-it-works"></a>
 
-## 工作原理 ✨
+## 工作原理（简述） ✨
 
-`body-emotion-sensor` 明确区分两个核心概念：
-- **`baseline`**：角色的原始体质与长期人格底色。
-- **`current`**：最新一轮更新后的身体状态，受近期交互影响。
+Body Emotion Sensor 并不是在“猜测”情绪，它模拟了一套完整的生物反馈环路：
 
-它会把单轮结构化情感分析 JSON 转成可持久化的五脏状态更新，以及给回复层直接使用的精简提示载荷。
+- **五脏系统映射：** 我们将情绪映射到五个核心“身体轴”，建立五行、五脏与情绪的对应关系：
 
-## 开发使用 🛠️
+| 五行 | 五脏 | 核心情绪 | 衰 (虚证) | 平 (平衡) | 旺 (实证) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **木** | 肝 | 怒 / 郁 | 委屈、抑郁、极度压抑 | 情绪稳定、条达舒畅 | 易怒、烦躁、暴怒失控 |
+| **火** | 心 | 喜 / 惊 | 空虚、淡漠、心如死灰 | 内心平静、喜乐有度 | 亢奋、多语、狂躁不安 |
+| **土** | 脾 | 思 / 虑 | 倦怠、思维停滞、大脑空白 | 思维清晰、思考有度 |焦虑、内耗、反复纠结 |
+| **金** | 肺 | 悲 / 忧 | 情感麻木、孤独、深层愁苦 | 情感细腻、自然释怀 | 伤感、消极、极度悲观 |
+| **水** | 肾 | 恐 / 惊 | 恐惧、畏缩、极度警觉 | 胆气平和、从容不迫 | 冒进、冲动、胆大妄为 |
+- **输入信号：** 每一轮交互被拆解为“语义刺激”（发生了什么）和“身体反应”（身体感觉如何）。
+    - **情感映射与影响（Emotional Mapping & Impact）：** 每种刺激都会根据预设的权重，增加或减少特定脏器的分数。
+        - **脆弱度（Fragility）与人设：** 每个智能体都有其独特的脆弱度系数，这与其人设紧密相关。例如，设定为“坚强”的智能体脆弱度较低，情绪波动较小；而“玻璃心”或“敏感”的智能体脆弱度较高，对刺激的反应会更剧烈，状态波动也更大。
+    - **相互作用（Interaction）：** 模拟中医五行生克，脏器之间会互相影响。本系统遵循中医与八字的思想：
+        - **旺则贪克忘生**：当某一脏器能量过旺（实证）时，它会优先去“克制”它所克的脏器，而忽略“滋生”下游脏器。例如：肝火过旺时，会剧烈克土（影响脾胃），而不再有效地生心火。
+        - **平则贪生忘克**：当脏器处于平衡或偏弱状态时，它会优先“滋生”下游脏器，而减少对他脏的克制。例如：肝气平和时，会温和地滋养心火（生血养神），而不会去攻击脾土。
+    - **稳态回归（Damping）：** 身体会随时间自然向“基线”（Baseline，即健康状态）回归。脆弱度同样会影响回归速度，高脆弱度意味着身体更难从失衡状态中恢复。
+- **输出载荷：** 最终数值被转化为直观的标签（如 `[略显急躁]`、`[内心平静]`），供智能体在回复时参考，从而调整语气和内容。
 
-本地开发可这样安装：
+## 可视化面板 📊
 
-```bash
-pip install -e .
-bes help
-```
+Body Emotion Sensor 提供了一个直观的可视化面板，帮助你实时监控和调试智能体的身体状态。
+
+<img src="./panel.webp" alt="可视化面板" width="100%" />
 
 启动可视化面板：
 
@@ -89,11 +86,19 @@ bes help
 bes panel --workspace /path/to/workspace --agent-id my-agent
 ```
 
-以下文档保留在源码仓库中，主要面向仓库开发与集成参考：
-- `docs/五脏情绪映射全表.md`
-- `docs/五脏情绪七阶状态表.md`
-- `docs/example-openclaw-agents.md`
-- `docs/example-openclaw-tools.md`
+## 更新计划 🛠️
+
+- **SillyTavern 插件支持**：接入酒馆生态，让本地角色也能拥有五脏情感系统。
+- **好感度系统**：将人际关系的深浅映射为对五脏状态的长期影响。
+- **离线动态演化**：即使在对话停止时，身体状态也会随时间自然演化（如气血恢复或情绪平复）。
+- **深度中医逻辑**：引入“虚则补其母，实则泄其子”等高级流转原理，进一步精细化脏器间的能量互动。
+- **视频生成集成**：探索将身体情绪状态直接驱动为短视频或动态表情。
+
+## Contributing 🤝
+
+欢迎提交 PR。
+
+如果你想改进 Body Emotion Sensor，无论是新想法、更好的集成方式、文档、提示词、适配器，还是工作流优化，都欢迎提 issue 或直接提交 PR。
 
 ## License 📄
 
