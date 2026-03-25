@@ -1,120 +1,100 @@
-# Body Emotion Sensor
+<h1 align="center">🫀 Body Emotion Sensor</h1>
 
-给你的 AI Agent 接入一套可持久化的情感系统，基于中医五脏与五行模型。
+<p align="center">
+  给你的 AI Agent 接入一套可持久化的情感系统，基于中医五脏与五行模型。
+</p>
 
-[English](https://github.com/AskKumptenchen/body-emotion-sensor/blob/main/README.md)
+<p align="center">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue" />
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-brightgreen" />
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/AskKumptenchen/body-emotion-sensor?style=flat" />
+</p>
 
-## 它能做什么
+<p align="center">
+  <a href="#quick-start">快速开始</a> ·
+  <a href="#features">核心功能</a> ·
+  <a href="#how-it-works">工作原理</a> ·
+  <a href="../README.md">English</a>
+</p>
 
-`body-emotion-sensor` 会把单轮结构化情感分析 JSON 转成：
+## 为什么需要 Body Emotion Sensor？ 💖
 
-- 可持久化的五脏状态更新
-- 给回复层直接使用的精简提示载荷
-- 便于调试的 state/history 轨迹数据
+你是否觉得，现在的 AI 智能体缺乏真正的“内在自我”？它们或许能在文字中模拟情绪，但并没有一个能在多次对话中延续的内部状态。
 
-它明确区分：
+**Body Emotion Sensor 旨在改变这一点：**
 
-- `baseline`：角色原始体质与长期人格底色
-- `current`：最新一轮更新后的身体状态
+- **持久化状态：** 赋予 AI 一个长期的身心情志体质（baseline），并让它自然演化。
+- **五脏五行模型：** 基于中医五行（金、木、水、火、土）理论，将复杂的情绪状态映射到五脏系统中。
+- **逐轮状态更新：** 将结构化的情感分析转化为实时的身体状态更新，从而潜移默化地影响智能体的回复风格。
 
-## 安装
+<a id="quick-start"></a>
+
+## 快速开始 🚀
+
+📥 **安装：**
 
 ```bash
 pip install body-emotion-sensor
 ```
 
-如果要使用可视化面板，请安装：
-
-```bash
-pip install body-emotion-sensor[viz]
-```
-
-安装后可直接使用：
+默认安装已包含可视化面板依赖。安装后可直接使用 CLI：
 
 ```bash
 bes help
 body-emotion-sensor help
 ```
 
-## CLI 总览
+🔄 **推荐使用流程：**
 
-```bash
-bes help
-bes init-prompt
-bes prompt analysis-input
-bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent"
-bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --init-json /path/to/init.json
-bes bootstrap --workspace /path/to/workspace --agent-id my-agent --name "My Agent"
-bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --input /path/to/analysis-input.json
-bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --json '{"analysis_target":"...", "...":"..."}'
-```
+1. 打印体质初始化提示词：`bes init-prompt`
+2. 初始化状态：`bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --init-json /path/to/init.json`
+3. 检查是否就绪：`bes check-init --workspace /path/to/workspace --agent-id my-agent --name "My Agent"`
+4. 启动新会话：`bes bootstrap --workspace /path/to/workspace --agent-id my-agent --name "My Agent"`
+5. 执行单轮更新：`bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --input /path/to/analysis-input.json`
 
-## 推荐使用流程
+<a id="features"></a>
 
-1. 先打印角色体质初始化提示词。
-2. 让上游模型产出角色初始化 JSON。
-3. 写入长期状态。
-4. 每一轮先让上游模型生成 `AnalysisInput` JSON。
-5. 再执行 `bes run`，把输出结果接到回复层。
+## 核心功能 🧩
 
-示例：
+- **状态持久化：** 按工作区和智能体 ID 存储长期的身心情绪状态。
+- **会话引导（Bootstrap）：** 在新会话开始前，生成 `TURN_CHANGE_TAGS`、`BODY_TAG` 和 `BASELINE_PERSONA`。
+- **精简提示载荷：** 为回复层提供轻量级的提示词注入，不占用过多上下文窗口。
+- **可追溯历史：** 保留完整的 state/history 轨迹数据，便于调试与可视化。
+- **可视化面板：** 运行 `bes panel` 直观查看智能体的情感变化轨迹。
 
-```bash
-bes init-prompt
-bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --init-json /path/to/init.json
-bes prompt analysis-input
-bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --input /path/to/analysis-input.json
-```
+<img src="./panel.png" alt="可视化面板" width="600" />
 
-## 默认输出契约
+<a id="how-it-works"></a>
 
-`bes bootstrap` 和 `bes run` 默认 stdout 包含：
+## 工作原理 ✨
 
-- `TURN_CHANGE_TAGS`
-- `BODY_TAG`
-- `BASELINE_PERSONA`
+`body-emotion-sensor` 明确区分两个核心概念：
+- **`baseline`**：角色的原始体质与长期人格底色。
+- **`current`**：最新一轮更新后的身体状态，受近期交互影响。
 
-如果你需要完整 `MappingResult`，请使用：
+它会把单轮结构化情感分析 JSON 转成可持久化的五脏状态更新，以及给回复层直接使用的精简提示载荷。
 
-```bash
-bes run --full ...
-```
-
-## 运行时提示词获取
-
-安装包不会把仓库里的 `docs/`、`prompts/` 等 Markdown 作为运行时资源分发。
-
-如果你在 `pip install` 后还需要提示词文本，请直接通过命令输出：
-
-```bash
-bes init-prompt
-bes prompt analysis-input
-```
-
-这样运行时集成就不需要依赖安装目录遍历。
-
-## 开发使用
+## 开发使用 🛠️
 
 本地开发可这样安装：
 
 ```bash
 pip install -e .
-python -m body_emotion help
+bes help
 ```
 
-可视化面板：
+启动可视化面板：
 
 ```bash
 bes panel --workspace /path/to/workspace --agent-id my-agent
 ```
 
 以下文档保留在源码仓库中，主要面向仓库开发与集成参考：
-
 - `docs/五脏情绪映射全表.md`
 - `docs/五脏情绪七阶状态表.md`
 - `docs/example-openclaw-agents.md`
 - `docs/example-openclaw-tools.md`
 
-## License
+## License 📄
 
-MIT，见仓库根目录 `LICENSE`。
+本项目使用仓库根目录 `LICENSE` 中的 `MIT` 协议。

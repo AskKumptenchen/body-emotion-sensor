@@ -195,8 +195,8 @@ def help_language_code(lang: str) -> str:
 def help_panel(lang: str) -> str:
     lg = _lg(lang)
     if lg == LANG_ZH:
-        return "启动可视化调试面板（需要安装 viz 额外依赖）"
-    return "Launch the visualization debug panel (requires the viz extra)"
+        return "启动可视化调试面板"
+    return "Launch the visualization debug panel"
 
 
 def help_host(lang: str) -> str:
@@ -500,12 +500,12 @@ def err_viz_dependencies_missing(lang: str, packages: list[str]) -> str:
         return (
             "可视化依赖未安装："
             f"{joined}\n"
-            "请先安装：pip install body-emotion-sensor[viz]"
+            "请重新安装或升级：pip install -U body-emotion-sensor"
         )
     return (
         "Visualization dependencies are missing: "
         f"{joined}\n"
-        "Install them first: pip install body-emotion-sensor[viz]"
+        "Reinstall or upgrade first: pip install -U body-emotion-sensor"
     )
 
 

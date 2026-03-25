@@ -4,30 +4,20 @@ description: Give an agent a persistent body-emotion state system that converts 
 metadata: {"openclaw":{"os":["win32","linux","darwin"]}}
 ---
 
-# Body Emotion Sensor
+# Body Emotion Sensor 🫀
 
-Give your AI agent a stable body-emotion state that persists across sessions and turns.
+Give your AI agent a stable body-emotion state that persists across sessions and turns. / 给你的 AI Agent 接入一套可持久化的情感系统。
 
 Use this skill to route requests to the local package docs, explain the runtime contract honestly, and operate the installed `bes` CLI only when the local environment is actually ready.
 
-## What this skill brings to your Agent
+## 🌟 What this skill brings to your Agent / 核心能力
 
-- **Persistent emotion state**: Store long-term body-emotion state per workspace and agent identity.
-- **Session bootstrap payload**: Generate `TURN_CHANGE_TAGS`, `BODY_TAG`, and `BASELINE_PERSONA` before a new session starts.
-- **Turn-by-turn updates**: Convert one upstream `AnalysisInput` JSON into prompt tags and updated local state.
-- **Repository-independent runtime**: Use the installed `bes` CLI prompt interface instead of assuming repository prompt files are available at runtime.
+- **Persistent emotion state (持久化情感状态)**: Store long-term body-emotion state per workspace and agent identity.
+- **Session bootstrap payload (会话引导载荷)**: Generate `TURN_CHANGE_TAGS`, `BODY_TAG`, and `BASELINE_PERSONA` before a new session starts.
+- **Turn-by-turn updates (逐轮状态更新)**: Convert one upstream `AnalysisInput` JSON into prompt tags and updated local state.
+- **Repository-independent runtime (独立运行时)**: Use the installed `bes` CLI prompt interface instead of assuming repository prompt files are available at runtime.
 
-## Entry behavior
-
-When this skill is used, the agent should:
-
-- explain Body Emotion Sensor at a high level in plain language
-- inspect the local repository files when they are available in the current workspace
-- prefer local package and repository documentation over inventing setup details
-- verify whether `bes` is already available before suggesting runtime commands
-- keep `--workspace`, `--agent-id`, and `--name` stable for the same agent instance
-
-## Safety boundary
+## 🛡️ Safety boundary / 安全边界
 
 This entry file should stay within a narrow and transparent scope:
 
@@ -38,7 +28,7 @@ This entry file should stay within a narrow and transparent scope:
 - Do not claim any cloud sync, remote storage, or network behavior unless the current local code or environment actually shows it.
 - Do not require credentials. This skill operates on local files and local CLI state unless the user explicitly adds another integration layer.
 
-## Local state and persistence
+## 💾 Local state and persistence / 本地状态与持久化
 
 Be explicit about where state is stored:
 
@@ -49,7 +39,7 @@ Be explicit about where state is stored:
 
 If the user asks about privacy, explain that the package writes local JSON state files in these locations and that this skill should not describe any remote storage unless verified separately.
 
-## Local document index
+## 📂 Local document index / 本地文档索引
 
 Use these local files as the primary reference:
 
@@ -63,7 +53,7 @@ Use these local files as the primary reference:
 - `src/body_emotion/store.py` for state and history persistence behavior
 - `src/body_emotion/locale_config.py` for user language config behavior
 
-## How to route requests
+## 🧭 How to route requests / 路由请求指南
 
 Choose the next local document based on the user's request:
 
@@ -73,15 +63,7 @@ Choose the next local document based on the user's request:
 4. If the user asks how OpenClaw integration should work, read the relevant file under `prompts/`.
 5. If the user asks what a command actually does, inspect `src/body_emotion/commands.py`.
 
-## Missing-resource rule
-
-If the expected local repository files are not available in the current workspace, do not improvise the full setup flow from memory. Instead:
-
-- explain which local files are missing
-- ask the user to provide the repository contents or point the agent to the correct local path
-- continue only after the relevant local documentation is available
-
-## Install and readiness rule
+## 🚀 Install and readiness rule / 安装与就绪规则
 
 If the user wants to actually enable runtime use:
 
@@ -114,11 +96,11 @@ bes check-init --workspace <W> --agent-id <ID> --name "<NAME>"
 
 Only treat the skill as available when the returned JSON contains `"ready": true`.
 
-## Runtime rules after available
+## 🔄 Runtime rules after available / 运行时规则
 
 When the local environment is ready, use the following runtime flow.
 
-### New session
+### New session / 新会话
 
 At the start of a new session, before the first reply, run:
 
@@ -132,7 +114,7 @@ Use the returned fields as the session-start prompt payload:
 - `BODY_TAG`
 - `BASELINE_PERSONA`
 
-### Before every reply
+### Before every reply / 每次回复前
 
 Before every reply, do these steps in order:
 
@@ -155,7 +137,7 @@ bes run --workspace <W> --agent-id <ID> --name "<NAME>" --input <analysis-input.
 - `BODY_TAG`
 - `BASELINE_PERSONA`
 
-## Important rules
+## ⚠️ Important rules / 重要规则
 
 - Always prefer `bes ...` commands over direct module paths for runtime use.
 - Do not use repository-only prompt files as the default runtime interface after installation; use `bes prompt ...` instead.
@@ -164,7 +146,7 @@ bes run --workspace <W> --agent-id <ID> --name "<NAME>" --input <analysis-input.
 - If the CLI is missing, say so clearly instead of pretending the runtime is ready.
 - If the user only wants to understand the package, explain it from local docs without pushing installation immediately.
 
-## Examples
+## 📖 Examples / 示例命令
 
 Minimal command reference:
 

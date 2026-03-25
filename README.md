@@ -1,126 +1,100 @@
-# Body Emotion Sensor
+<h1 align="center">🫀 Body Emotion Sensor</h1>
 
-Give your AI agent a persistent emotional system based on the TCM Five Zang and Five Elements model.
+<p align="center">
+  Give your AI agent a persistent emotional system based on the TCM Five Zang and Five Elements model.
+</p>
 
-[简体中文](https://github.com/AskKumptenchen/body-emotion-sensor/blob/main/docs/README.zh-CN.md)
+<p align="center">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue" />
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-brightgreen" />
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/AskKumptenchen/body-emotion-sensor?style=flat" />
+</p>
 
-## What It Does
+<p align="center">
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#how-it-works">How It Works</a> ·
+  <a href="./docs/README.zh-CN.md">简体中文</a>
+</p>
 
-`body-emotion-sensor` converts one turn of structured emotional analysis JSON into:
+## Why Body Emotion Sensor? 💖
 
-- persistent body-axis state updates
-- a compact prompt payload for reply shaping
-- traceable state/history data for debugging
+Do you ever feel that AI agents lack a true sense of "self"? They might simulate emotions in text, but they don't have a persistent internal state that carries over between conversations. 
 
-It distinguishes between:
+**Body Emotion Sensor is here to change that:**
 
-- `baseline`: the agent's native constitution and long-term personality color
-- `current`: the body state after the latest turn
+- **Persistent State:** Give your AI a long-term emotional and physical constitution (baseline) that evolves naturally.
+- **TCM Five Zang Model:** Built on the traditional Chinese medicine concepts of the Five Elements (Metal, Wood, Water, Fire, Earth) to map complex emotional states.
+- **Turn-by-Turn Updates:** Converts structured emotional analysis into real-time body state updates, affecting how the agent responds.
 
-## Install
+<a id="quick-start"></a>
+
+## Quick Start 🚀
+
+📥 **Install:**
 
 ```bash
 pip install body-emotion-sensor
 ```
 
-For the visualization panel:
-
-```bash
-pip install body-emotion-sensor[viz]
-```
-
-After installation you can use either command:
+The visualization panel is included in the default install. After installation, you can use the CLI:
 
 ```bash
 bes help
 body-emotion-sensor help
 ```
 
-## CLI Overview
+🔄 **Recommended Flow:**
 
-```bash
-bes help
-bes prompt init
-bes prompt openclaw-example
-bes prompt analysis-input
-bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent"
-bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --init-json /path/to/init.json
-bes check-init --workspace /path/to/workspace --agent-id my-agent --name "My Agent"
-bes bootstrap --workspace /path/to/workspace --agent-id my-agent --name "My Agent"
-bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --input /path/to/analysis-input.json
-bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --json '{"analysis_target":"...", "...":"..."}'
-bes panel --workspace /path/to/workspace --agent-id my-agent
-```
+1. Print the constitution initialization prompt: `bes prompt init`
+2. Initialize state: `bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --init-json /path/to/init.json`
+3. Check readiness: `bes check-init --workspace /path/to/workspace --agent-id my-agent --name "My Agent"`
+4. Bootstrap a new session: `bes bootstrap --workspace /path/to/workspace --agent-id my-agent --name "My Agent"`
+5. Run turn updates: `bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --input /path/to/analysis-input.json`
 
-## Recommended Flow
+<a id="features"></a>
 
-1. Print the constitution initialization prompt.
-2. Use your upstream model to generate the role init JSON.
-3. Write the long-term state.
-4. If the host is OpenClaw, print the OpenClaw examples and update AGENTS / TOOLS separately.
-5. Run `bes check-init` to confirm the code-level setup is ready.
-6. For each new session, run `bes bootstrap` before the first assistant reply.
-7. For each turn, generate `AnalysisInput` JSON upstream.
-8. Run one update and use the returned prompt payload in your reply layer.
+## Features 🧩
 
-Example:
+- **State Persistence:** Stores long-term body-emotion state per workspace and agent identity.
+- **Session Bootstrap:** Generates `TURN_CHANGE_TAGS`, `BODY_TAG`, and `BASELINE_PERSONA` before a new session starts.
+- **Compact Prompt Payload:** Provides a lightweight payload for reply shaping without overwhelming the context window.
+- **Traceable History:** Keeps state/history data for debugging and visualization.
+- **Visualization Panel:** Run `bes panel` to view the agent's emotional journey visually.
 
-```bash
-bes prompt init
-bes init-state --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --init-json /path/to/init.json
-bes prompt openclaw-example
-bes check-init --workspace /path/to/workspace --agent-id my-agent --name "My Agent"
-bes bootstrap --workspace /path/to/workspace --agent-id my-agent --name "My Agent"
-bes prompt analysis-input
-bes run --workspace /path/to/workspace --agent-id my-agent --name "My Agent" --input /path/to/analysis-input.json
-```
+<img src="./docs/panel.png" alt="Visualization Panel" width="600" />
 
-## Output Contract
+<a id="how-it-works"></a>
 
-The default stdout of `bes bootstrap` and `bes run` contains:
+## How It Works ✨
 
-- `TURN_CHANGE_TAGS`
-- `BODY_TAG`
-- `BASELINE_PERSONA`
+`body-emotion-sensor` distinguishes between two core concepts:
+- **`baseline`**: The agent's native constitution and long-term personality color.
+- **`current`**: The body state after the latest turn, influenced by recent interactions.
 
-Use `bes run --full` when you need the complete `MappingResult`.
+It converts one turn of structured emotional analysis JSON into persistent body-axis state updates and a compact prompt payload for the reply layer.
 
-## Runtime Prompt Access
-
-The package does not ship internal repository docs such as `docs/` or `prompts/` as install-time resources.
-
-If you need the built-in prompt texts after `pip install`, use:
-
-```bash
-bes prompt init
-bes prompt openclaw-example
-bes prompt analysis-input
-```
-
-This keeps runtime integrations independent from repository directory traversal.
-
-## Development
+## Development 🛠️
 
 For local development:
 
 ```bash
 pip install -e .
-python -m body_emotion help
+bes help
 ```
 
-Optional visualization panel:
+Visualization panel:
 
 ```bash
 bes panel --workspace /path/to/workspace --agent-id my-agent
 ```
 
 Repository-only docs remain in the source repo, for example:
-
 - `docs/五脏情绪映射全表.md`
 - `docs/五脏情绪七阶状态表.md`
 - `prompts/example-openclaw-agents.md`
 - `prompts/example-openclaw-tools.md`
 
-## License
+## License 📄
 
-MIT. See `LICENSE`.
+This project is released under the `MIT` license in the repository `LICENSE`.

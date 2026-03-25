@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "body-emotion-sensor"
-version = "0.1.0"
+version = "0.1.1"
 description = "Body emotion mapper: structured emotion analysis (AnalysisInput) JSON to body-axis states and prompt tags"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -21,7 +21,10 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = []
+dependencies = [
+    "streamlit>=1.28",
+    "plotly>=5",
+]
 
 [project.urls]
 Homepage = "https://github.com/AskKumptenchen/body-emotion-sensor"
@@ -33,7 +36,7 @@ bes = "body_emotion.commands:main"
 body-emotion-sensor = "body_emotion.commands:main"
 
 [project.optional-dependencies]
-viz = ["streamlit>=1.28", "plotly>=5"]
+viz = []
 
 [tool.setuptools]
 package-dir = {"" = "src"}
