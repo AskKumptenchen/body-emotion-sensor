@@ -18,7 +18,8 @@
   <a href="#quick-start">快速开始</a> ·
   <a href="#what-happens">接入后会发生什么</a> ·
   <a href="#how-it-works">工作原理</a> ·
-  <a href="../README.md">English</a>
+  <a href="../README.md">English</a> ·
+  <a href="./README.ja.md">日本語</a>
 </p>
 
 <img src="./cover_web.webp" alt="Body Emotion Sensor 封面" width="100%" />

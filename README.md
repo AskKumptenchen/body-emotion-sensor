@@ -18,7 +18,8 @@
   <a href="#quick-start">Quick Start</a> ·
   <a href="#what-happens">What Happens</a> ·
   <a href="#how-it-works">How It Works</a> ·
-  <a href="./docs/README.zh-CN.md">简体中文</a>
+  <a href="./docs/README.zh-CN.md">简体中文</a> ·
+  <a href="./README.ja.md">日本語</a>
 </p>
 
 <img src="./docs/cover_web.webp" alt="Body Emotion Sensor Cover" width="100%" />
