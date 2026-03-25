@@ -25,9 +25,26 @@
 
 ## Why Body Emotion Sensor? 💖
 
-Do you ever feel that AI agents lack a true sense of "self"? They might simulate emotions in text, but they don't have a persistent internal state that carries over between conversations. 
+Do you ever feel that AI agents lack a true sense of "self"?
 
-**Body Emotion Sensor is here to change that.**
+Current AI often merely "acts out" emotions: you praise it, and it smiles politely; you scold it, and it apologizes mechanically. These emotions are instantaneous, compliant, and often predictable even before the AI responds. This is because AI lacks the "physiological feedback" that humans possess.
+
+#### 🧠 The Reality: Logical Machines Without "Body Sensation"
+Human emotions are not generated in a vacuum; they stem from the vibrations of the body:
+- When we are provoked, **Liver Fire** rises, bringing an irrepressible heat.
+- When we are heartbroken, the **Heart** contracts, creating a very real ache.
+- When we are frightened, **Kidney Qi** is depleted, leading to a long-lasting chill.
+
+Traditional AI relies solely on "probabilistic guessing" based on context to decide what tone to use. It lacks an internal state that persists, accumulates, and influences its thinking across multiple conversations.
+
+#### ☯️ The Vision: "Digital Organs" Based on Five Elements
+**Body Emotion Sensor** aims to break this "acting" paradigm. Based on TCM and the Five Elements theory, we have designed a persistent body-emotion perception system based on the Five Zang (internal organs):
+
+1.  **From "Guessing" to "Feeling"**: Instead of guessing a tone, the AI naturally radiates an emotional undertone based on the balance or deficiency of its internal organs (Wood, Fire, Earth, Metal, Water).
+2.  **Emotional Persistence**: Damage or nourishment to the organs is continuous. A heated argument might leave the AI's "Liver" in a long-term state of imbalance, affecting its attitude in subsequent interactions.
+3.  **Inherent Unpredictability**: Just as humans cannot fully control their physiological reactions, the AI's responses are constrained by its "body state," resulting in a more lifelike and authentic human-AI interaction.
+
+**Let AI stop "acting" and start "feeling"—body sensation first, emotion second.**
 
 <a id="quick-start"></a>
 
